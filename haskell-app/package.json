@@ -1,5 +1,5 @@
 {
-  "productName" : "Haskell Electron App",
+  "productName": "Haskell Electron App",
   "name": "haskell-app",
   "version": "1.0.0",
   "description": "A minimal Electron application",
@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/codetalkio/Haskell-Electron-app#readme",
   "devDependencies": {
-    "electron-prebuilt": "^0.37.8"
+    "electron-prebuilt": "^1.0.1"
   }
 }

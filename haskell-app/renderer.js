@@ -1,34 +1,41 @@
 // Backend and endpoint details
-var host     = "http://127.0.0.1:8080",
-    endpoint = "/users";
+const host     = 'http://127.0.0.1:8080'
+const endpoint = '/users'
 // Retry configuration
-var tryNo    = 0,
-    maxTries = 50,
-    waitTime = 250;
+let maxNoOfAttempts        = 50,
+    waitTimeBetweenAttempt = 250
 
-var fetchUserList = function() {
+let _fetchUserList = function(waitTime, maxAttempts, currentAttemptNo) {
   $.getJSON(host + endpoint, function(users) {
-    $("#status").html("Fetched the content after try #" + (tryNo + 1) + "!");
+    $('#status').html(`Fetched the content after attemt no.
+                       ${currentAttemptNo}!`)
     // Construct the user list HTML output
-    var output = "";
-    for (var i in users) {
-      var user = users[i];
-      output += "ID: " + user.userId;
-      output += ", Firstname: " + user.userFirstName;
-      output += ", Lastname: " + user.userLastName;
-      output += "<br>";
+    let output = "";
+    for (let i in users) {
+      let user = users[i]
+      output += `ID: ${user.userId},
+                 Firstname: ${user.userFirstName},
+                 Lastname: ${user.userLastName}
+                 <br>`
     }
-    $("#userList").html(output);
+    $('#userList').html(output)
   }).fail(function() {
-    $("#status").html("Try #" + (tryNo + 1) + ". " +
-                   "Are you sure the server is running on " + host + "?");
-    tryNo += 1;
-    // Keep trying until we get an answer or reach the maximum number of tries
-    if (tryNo < maxTries) {
-      setTimeout(fetchUserList, waitTime);
+    $('#status').html(`Attempt no. <b>${currentAttemptNo}</b>. Are you sure the
+                       server is running on <b>${host}</b>, and the endpoint
+                       <b>${endpoint}</b> is correct?`)
+    // Keep trying until we get an answer or reach the maximum number of retries
+    if (currentAttemptNo < maxAttempts) {
+      setTimeout(function() {
+        _fetchUserList(waitTime, maxAttempts, currentAttemptNo+1)
+      }, waitTime)
     }
-  });
+  })
+}
+
+// Convenience function for _fetchUserList
+let fetchUserList = function(waitTimeBetweenAttempt, maxNoOfAttempts) {
+  _fetchUserList(waitTimeBetweenAttempt, maxNoOfAttempts, 1)
 }
 
 // Start trying to fetch the user list
-fetchUserList();
+fetchUserList(waitTimeBetweenAttempt, maxNoOfAttempts)

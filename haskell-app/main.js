@@ -32,7 +32,7 @@ function createWindow () {
 }
 
 function createBackendServer () {
-  child_process.spawn('./resources/backend-exe')
+  backendServer = child_process.spawn('./resources/backend-exe')
 }
 
 // This method will be called when Electron has finished
@@ -42,6 +42,11 @@ app.on('ready', createWindow)
 
 // Start the backend web server when Electron has finished initializing
 app.on('ready', createBackendServer)
+
+// Close the server when the application is shut down
+app.on('will-quit', function() {
+  backendServer.kill()
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
