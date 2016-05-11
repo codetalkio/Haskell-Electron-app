@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Heya Servant!</title>
+  </head>
+  <body>
+    <h1>User list:</h1>
+    <div id="status"><!-- The request status --></div>
+    <div id="userList">
+      <!-- We'll fill this with the user information -->
+    </div>
+  </body>
+  <script>
+    // Avoid clashing Node.js/Electron with jQuery as per
+    // http://electron.atom.io/docs/v0.37.8/faq/electron-faq/#i-can-not-use-jqueryrequirejsmeteorangularjs-in-electron
+    window.nodeRequire = require;
+    delete window.require;
+    delete window.exports;
+    delete window.module;
+    // Fetch jQuery
+    window.$ = window.jQuery = nodeRequire('./resources/jQuery-2.2.3.min.js')
+    // The JS file that will do the heavy lifting
+    nodeRequire('./renderer.js')
+  </script>
+</html>

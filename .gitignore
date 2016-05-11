@@ -1,3 +1,4 @@
+.DS_Store
 dist
 cabal-dev
 *.o
@@ -14,3 +15,6 @@ cabal.sandbox.config
 *.aux
 *.hp
 .stack-work/
+
+haskell-app/resources/backend-exe
+node_modules

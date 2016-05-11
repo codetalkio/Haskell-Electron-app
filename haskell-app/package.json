@@ -1,0 +1,29 @@
+{
+  "productName" : "Haskell Electron App",
+  "name": "haskell-app",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codetalkio/Haskell-Electron-app.git"
+  },
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial"
+  ],
+  "author": "codetalk",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/codetalkio/Haskell-Electron-app/issues"
+  },
+  "homepage": "https://github.com/codetalkio/Haskell-Electron-app#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^0.37.8"
+  }
+}
